@@ -47,13 +47,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url(FWRKS .'bootstrap-3.3.7/js/bootstrap.min.js'); ?>"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-    <!-- MENU SECTION -->    
-    <?php if (isset($menu)) echo $menu; ?>
-    <!-- CONTENT SECTION -->
-    <?php if (isset($content)) echo $content; ?>
-    <!-- FOOTER SECTION -->
-    <?php $this->load->view("sections/footer") ?>
-
+    <div class="container">
+        <!-- MENU SECTION -->    
+        <?php if (isset($menu)) echo $menu; ?>
+        <!-- CONTENT SECTION -->
+        <div class="pading-top">
+            <?php if (isset($content)) echo $content; ?>
+        </div>
+        <!-- FOOTER SECTION -->
+        <?php $this->load->view("sections/footer") ?>
+    </div>
+    
     <!-- SCRIPTS SECTION -->    
     <script src="<?php echo base_url(JS .'master.js'); ?>"></script>
     

@@ -29,41 +29,38 @@ class login extends CI_Controller {
             $this->form_validation->set_message('required', 'El dato es requerido');
             $this->form_validation->set_error_delimiters("<div class='alert alert-danger text-left'><i class='fa fa-exclamation-triangle'></i><span style='padding-left: 10px;'>","</span></div>");
 
-            $this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
-            $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');        
-
-            if($this->form_validation->run() == FALSE)
-            {                       
-                $this->form_validation->set_rules('passconf', 'Usuario y/o contraseña incorrectos...', 'required');
-                
-                /*if ($this->_checkuser($this->input->post('password'))){
+            $this->form_validation->set_rules('username', 'Username', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+            
+            if($this->form_validation->run() == TRUE)
+            {                   
+                if ($this->_checkuser($this->input->post('username'),$this->input->post('password'))){
                     $this->_redirect();
                 } else {                    
-                    $this->model['errorsumary'] = 'Usuario y/o contraseña incorrectos...';
-                }*/
+                    $this->session->set_flashdata('errorLogin', 'Usuario y/o contraseña incorrectos...');                    
+                }
             }
             $this->model['rout'] =  $this->input->post('rout');
             $this->_showloginpage();
         }
     }
     
-    private function _checkuser($password)
+    private function _checkuser($username,$password)
     {        
-        $this->load->model('logon_model');
-        $username = $this->input->post('username');
+        $returnResult = false;
         
+        $this->load->model('logon_model');
+                
         $sess_array = $this->logon_model->login($username,$password);
         if ($sess_array) {
             $this->session->set_userdata('logged_in', $sess_array);
-            return TRUE;
-        }else{            
-            $this->form_validation->set_message('checkuser', '');
-            return FALSE;
-      }
+            $returnResult = TRUE;
+        }
+        return $returnResult;
     }
     
     private function _redirect(){
-        $redirect = $this->router->default_controller;                
+        $redirect = $this->router->admin_controller;                
         $rout = $this->input->post('rout');
         if ($rout){
             $originrout = $this->uri->segment(1) . $this->uri->segment(2);            
@@ -76,7 +73,7 @@ class login extends CI_Controller {
     
     public function logout(){
         $this->session->sess_destroy();
-        redirect('logon');
+        redirect('login');
     }
     
 }

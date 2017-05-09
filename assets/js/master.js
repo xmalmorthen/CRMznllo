@@ -7,9 +7,7 @@ $(window).scroll(function() {
           $(this).addClass("slide");
         }
     });
-});
-        
-        
+});       
         
 $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
     if (this.hash !== "") {
@@ -23,3 +21,10 @@ $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
     } // End if
 });
 
+$("#myNavbar a").on('click',function(event){
+    if ($(this).attr('data-toggle') != 'dropdown') {
+        if ($('#btnToggle').attr('aria-expanded') == 'true') {
+            $("#myNavbar").collapse("toggle");
+        };    
+    }
+});

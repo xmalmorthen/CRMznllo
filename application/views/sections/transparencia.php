@@ -1,5 +1,5 @@
 <!-- Container (About Section) -->
-<div id="transparencia" class="container-fluid paddint-top">
+<div id="transparencia" class="container-fluid">
     <div class="row">
         <div class="col-sm-8">
             <h2>About Company Page</h2><br>

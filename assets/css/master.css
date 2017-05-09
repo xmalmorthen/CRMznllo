@@ -128,17 +128,14 @@ body {
   }
   .navbar-nav li a:hover, .navbar-nav li.active a {
       color: red !important;
-      background-color: #fff !important;
+      background-color: #f9f9f9 !important;
   }
   .navbar-default .navbar-toggle {
       border-color: transparent;
       color: #fff !important;
-  }
-  #myNavbar>ul{
-      margin-top: 40px;      
-  }
-  .paddint-top{
-      padding: 100px 25px;      
+  }  
+  .pading-top{
+      padding-top: 48px;
   }
   footer .glyphicon {
       font-size: 20px;
@@ -181,10 +178,25 @@ body {
     .btn-lg {
         width: 100%;
         margin-bottom: 35px;
-    }
+    }    
   }
   @media screen and (max-width: 480px) {
     .logo {
         font-size: 150px;
     }
   }
+  @media screen and (min-width: 768px) {
+    #myNavbar>ul{
+        margin-top: 40px;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    #lblBienvenida{
+        display: none;
+    }
+  }
+  
+  
+  
+  
+  

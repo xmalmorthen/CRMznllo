@@ -90,3 +90,9 @@ define("CSS", "assets/css/");
 define("JS", "assets/js/");
 define("FWRKS", "assets/fwrks/");
 define("IMGS", "assets/imgs/");
+
+define("REPO", "./files");
+
+define("SESSFORCED",TRUE);
+define("SESSFORCEDUSER",'admin@crm.com');
+define("SESSFORCEDPASS",'..121212qw');
