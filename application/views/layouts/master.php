@@ -71,6 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <script type="text/javascript">
         $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
             <?php if (isset($scripts)) echo $scripts; ?>
         })
     </script>

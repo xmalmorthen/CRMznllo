@@ -91,7 +91,10 @@ define("JS", "assets/js/");
 define("FWRKS", "assets/fwrks/");
 define("IMGS", "assets/imgs/");
 
-define("REPO", "./files");
+define("ROOTREPO","./files/");
+define("EXCELREPO", ROOTREPO . "excel/");
+define("XMLREPO", ROOTREPO . "xml/");
+define("JSONCATALOG", ROOTREPO . "catalog.json");
 
 define("SESSFORCED",TRUE);
 define("SESSFORCEDUSER",'admin@crm.com');

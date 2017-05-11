@@ -1,7 +1,3 @@
-<style type="text/css">    
-</style>
-    
-
 <br/>
 <div class="page-header">
     <h1>Transparencia</h1>
@@ -10,59 +6,49 @@
 <br/>
 <div class="container">
     <div class="row">
-        <div id="RegForm" class="col-sm-5">
+        <div id="RegForm" class="col-sm-12">
             <form class="form-horizontal " method="post" enctype="multipart/form-data" action="<?php echo base_url("index.php/administrador/transparencia") ?>">    
+                <?php 
+                    if ($this->input->post() || $this->session->flashdata('success')) { ?>
+                        <div class='alert <?php echo ($this->session->flashdata('error') ? 'alert-danger' : ($this->session->flashdata('success') ? 'alert-success' : 'alert-danger' )); ?>  text-left'>
+                            <i class='fa fa-exclamation-triangle'></i>
+                            <span style='padding-left: 10px;'><?php echo ($this->session->flashdata('error') ? $this->session->flashdata('error') : ($this->session->flashdata('success') ? $this->session->flashdata('success') : '' )); ?></span>
+                        </div>
+                <?php } ?>
+                
                 <div class="form-group">
-                    <label class="control-label custom-file col-sm-3" for="excelFile">Archivo de Excel:</label>
-                    <div class="input-group col-sm-9">
+                    <label class="control-label custom-file col-sm-3" for="excelFile">* Archivo de Excel:</label>
+                    <div class="input-group col-sm-8">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="excelFile" name="excelFile" type="file" class="form-control" accept=".xlsx,.xls">
                     </div>        
                 </div>
                 <div class="form-group">
-                    <label class="control-label custom-file col-sm-3" for="xmlFile">Archivo XML:</label>
-                    <div class="input-group col-sm-9">
+                    <label class="control-label custom-file col-sm-3" for="xmlFile">* Archivo XML:</label>
+                    <div class="input-group col-sm-8">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="xmlFile" name="xmlFile" type="file" class="form-control" accept=".xml">
                     </div>        
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="descFile">Descripción:</label>
-                    <div class="col-sm-9" style="padding: 0; margin: 0;">            
+                    <div class="col-sm-8" style="padding: 0; margin: 0;">            
                         <textarea id="descFile" name="descFile" class="form-control" rows="5" ></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default">Registrar</button>                
+                <button type="submit" class="btn btn-default">Registrar</button>
+                <h2 class="pull-right label label-warning">* Información requerida</h2>
+                
             </form>
-        </div>        
-        <div id="RegGrid" class="col-sm-7">
-            <label class="control-label" for="xmlFile">Archivos Registrados:</label>
-            <table class="table table-condensed">
-                <thead>
-                  <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                  </tr>
-                </tbody>
-            </table>
+            <br/>
+            <br/>
+        </div>
+        <div id="RegGrid" class="col-sm-12">
+            <div class="page-header">
+                <h3>Repositorio</h3>
+            </div>
+            <p>Archivos Registrados:</p>
+            <?php echo $table; ?>            
         </div>
     </div>
 </div>
