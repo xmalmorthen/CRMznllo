@@ -48,7 +48,35 @@
                 <h3>Repositorio</h3>
             </div>
             <p>Archivos Registrados:</p>
+            
+            <?php 
+                if ($this->session->flashdata('errorAction')) { ?>
+                    <div id="errorAction" class='alert alert-danger text-left'>
+                        <i class='fa fa-exclamation-triangle'></i>
+                        <span style='padding-left: 10px;'><?php echo $this->session->flashdata('errorAction'); ?></span>
+                    </div>
+            <?php } else if ($this->session->flashdata('successAction')){?>
+                    <div id="successAction" class='alert alert-success text-left'>
+                        <i class='fa fa-check'></i>
+                        <span style='padding-left: 10px;'><?php echo $this->session->flashdata('successAction'); ?></span>
+                    </div>
+            <?php } ?>
+            
+            <?php if ($this->session->flashdata('Note')){?>            
+                <div id="NoteAction" class='alert alert-warning text-left'>
+                    <i class='fa fa-info'></i>
+                    <span style='padding-left: 10px;'><?php echo $this->session->flashdata('Note'); ?></span>
+                </div>
+            <?php } ?>
+            
             <?php echo $table; ?>            
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        setTimeout(function() { $('#errorAction').alert('close'); $('#successAction').alert('close');  }, 5000);
+        setTimeout(function() { $('#successAction').alert('close');  }, 20000);
+    })
+</script>
+    

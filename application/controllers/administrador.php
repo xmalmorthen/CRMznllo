@@ -166,6 +166,8 @@ class administrador extends CI_Controller {
         $this->table->set_template($tmpl);      
         $this->table->set_heading('Archivo Excel', 'Archivo XML', 'Descripción', 'Fecha de Publicación', 'Hora de Publicación','Acciones');
         
+        $areOneActive = FALSE;
+        
         foreach($jsonCatalog as $index => $row)
         {
             if ( $row['data']['status'] > 1 )                
@@ -177,8 +179,8 @@ class administrador extends CI_Controller {
             
             $actions = anchor("./transparencia/download/Excel/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo de Excel"></i>')
                     . anchor("./transparencia/download/XML/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo XML"></i>')
-                    . anchor("./transparencia/delete/$index",'<i class="fa fa-trash fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Eliminar archivos"></i> ')
-                    . anchor("./transparencia/". ( $row['data']['status'] == 1 ? 'hide' : 'show') ."/$index",'<i class="fa fa-eye'. ( $row['data']['status'] == 1 ? '-slash' : '') .' fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="' . ( $row['data']['status'] == 1 ? 'Ocultar información' : 'Publicar información') . '"></i> ');
+                    . anchor("./transparencia/delete/$index",'<i class="fa fa-trash fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Eliminar archivos"></i>')
+                    . anchor("./transparencia/". ( $row['data']['status'] == 1 ? 'hide' : 'show') ."/$index",'<i class="fa fa-eye'. ( $row['data']['status'] == 1 ? '-slash' : '') .' fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="' . ( $row['data']['status'] == 1 ? 'Ocultar información' : 'Publicar información') . '"></i>');
             
             $this->table->add_row(
                 array('data' => $row['excel']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
@@ -189,7 +191,14 @@ class administrador extends CI_Controller {
                 array('data' => $actions, 'class' => ( $row['data']['status'] == 1 ? 'success' : '') )
                 
             );
+            
+            if (!$areOneActive)
+                $areOneActive = $row['data']['status'] == 1;
         }
+        
+        if (!$areOneActive)
+            $this->session->set_flashdata('Note',"Actualmente no se encuentra información pública activa, favor de considerar activar alguno de los registros.");            
+        
         $table = $this->table->generate();
         $viewModel['table'] = $table;                
         
