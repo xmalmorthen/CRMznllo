@@ -18,11 +18,12 @@ class transparencia extends CI_Controller {
     public function download($fileType,$ref)
     {   
         try {
+            $redirectUri = $this->input->get('redirectUri');
             if (isset($this->jsonCatalog[$ref])) {
                 $this->load->helper('download');        
 
                 $file = base_url(str_replace("./", "", ( $fileType == 'Excel' ? EXCELREPO : XMLREPO )) . ( $fileType == 'Excel' ? $this->jsonCatalog[$ref]['excel']['file_name'] : $this->jsonCatalog[$ref]['xml']['file_name'] ));
-
+                
                 $file_headers = @get_headers($file);
                 if($file_headers[0] == 'HTTP/1.1 404 Not Found')
                     throw new Exception("Archivo no encontrado");
@@ -31,13 +32,13 @@ class transparencia extends CI_Controller {
                 if ($data === FALSE)
                     throw new Exception("Error al leer el archivo");
 
-                force_download($this->jsonCatalog[$ref]['excel']['original_name'], $data);
+                force_download($this->jsonCatalog[$ref][ ( $fileType == 'Excel' ? 'excel' : 'xml' ) ]['original_name'], $data);
             } else 
                 throw new Exception("Referencia a archivo no encontrada");
         } catch (Exception $ex) {          
             $this->session->set_flashdata('errorAction', $ex->getMessage());
-            redirect("./administrador/transparencia");        
-        }            
+            redirect(!$redirectUri ? "./administrador/transparencia" : $redirectUri);
+        }
     }
     
     public function delete($ref)

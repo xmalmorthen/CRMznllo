@@ -12,7 +12,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#transparencia">TRANSPARENCIA</a></li>        
+        <li><a href="./index.php/main/transparencia">TRANSPARENCIA</a></li>
       </ul>
     </div>
   </div>

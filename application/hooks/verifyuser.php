@@ -14,7 +14,7 @@ class verifyuser{
         $method = $this->_CI->router->method;        
         $controller = $this->_CI->router->class;
                       
-        if (in_array($controller, $params)) {
+        if (in_array($controller, $params) || ( $controller == 'transparencia' && $method == 'download' )) {
             return;
         }
         

@@ -11,6 +11,8 @@ class administrador extends CI_Controller {
         
         $this->model['link'] = array(
             "<link rel='stylesheet' type='text/css' href='". base_url(CSS . 'jquery.dataTables.min.css') ."'>",
+            "<link rel='stylesheet' type='text/css' href='". base_url(CSS . 'dataTables.bootstrap.min.css') ."'>",
+            "<link rel='stylesheet' type='text/css' href='". base_url(CSS . 'ownDataTableStyle.css') ."'>",
             "<link rel='stylesheet' type='text/css' href='". base_url(CSS . 'transparencia.css') ."'>"
         );
         $this->model['script'] = array(

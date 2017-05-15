@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
-<html lang="sp">
+<html lang="es">
 <head>
     <title><?php echo isset($title) ? $title : 'Cruz Roja Manzanillo Colima' ; ?></title>
       
