@@ -5,12 +5,9 @@
 !*/cache/index.html
 !*/cache/.htaccess
 
-files/excel/*
-files/xml/*
+files/html/*
 files/*.*
 !files/index.html
-!files/excel/index.html
-!files/xml/index.html
-
+!files/html/index.html
 
 nbproject
