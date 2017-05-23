@@ -17,28 +17,20 @@
                 <?php } ?>
                 
                 <div class="form-group">
-                    <label class="control-label custom-file col-sm-3" for="excelFile">* Archivo de Excel:</label>
+                    <label class="control-label custom-file col-sm-3" for="htmlFile"><a href="#" data-toggle="tooltip" title="Información requerida">*</a> Archivo HTML: </label>
                     <div class="input-group col-sm-8">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="excelFile" name="excelFile" type="file" class="form-control" accept=".xlsx,.xls">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-folder-open"></i></span>
+                        <input id="htmlFile" name="htmlFile" type="file" class="form-control" accept=".html">
                     </div>        
-                </div>
-                <div class="form-group">
-                    <label class="control-label custom-file col-sm-3" for="xmlFile">* Archivo XML:</label>
-                    <div class="input-group col-sm-8">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="xmlFile" name="xmlFile" type="file" class="form-control" accept=".xml">
-                    </div>        
-                </div>
+                </div>                
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="descFile">Descripción:</label>
                     <div class="col-sm-8" style="padding: 0; margin: 0;">            
                         <textarea id="descFile" name="descFile" class="form-control" rows="5" ></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default">Registrar</button>
-                <h2 class="pull-right label label-warning">* Información requerida</h2>
-                
+                <button id="btnSubmit" type="submit" class="btn btn-success btn-md" data-loading-text="<i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i> Registrando, favor de esperar..."><i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp; Registrar</button>
+                <h2 class="pull-right label label-warning">* Información requerida</h2>                
             </form>
             <br/>
             <br/>
@@ -77,6 +69,15 @@
     $(document).ready(function(){
         setTimeout(function() { $('#errorAction').alert('close'); $('#successAction').alert('close');  }, 5000);
         setTimeout(function() { $('#successAction').alert('close');  }, 20000);
+        
+        $('form').submit(function () {
+            var $this = $('#btnSubmit');
+            $this.button('loading');
+            setTimeout(function () {
+                $this.button('reset');
+            }, 30000);
+        });
+        
     })
 </script>
     

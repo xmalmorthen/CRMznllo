@@ -92,8 +92,7 @@ define("FWRKS", "assets/fwrks/");
 define("IMGS", "assets/imgs/");
 
 define("ROOTREPO","./files/");
-define("EXCELREPO", ROOTREPO . "excel/");
-define("XMLREPO", ROOTREPO . "xml/");
+define("HTMLREPO", ROOTREPO . "html/");
 define("JSONCATALOG", ROOTREPO . "catalog.json");
 
 define("SESSFORCED",TRUE);

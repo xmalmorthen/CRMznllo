@@ -22,7 +22,7 @@ class transparencia extends CI_Controller {
             if (isset($this->jsonCatalog[$ref])) {
                 $this->load->helper('download');        
 
-                $file = base_url(str_replace("./", "", ( $fileType == 'Excel' ? EXCELREPO : XMLREPO )) . ( $fileType == 'Excel' ? $this->jsonCatalog[$ref]['excel']['file_name'] : $this->jsonCatalog[$ref]['xml']['file_name'] ));
+                $file = base_url(str_replace("./", "", HTMLREPO . $this->jsonCatalog[$ref]['html']['file_name']));
                 
                 $file_headers = @get_headers($file);
                 if($file_headers[0] == 'HTTP/1.1 404 Not Found')
@@ -32,7 +32,7 @@ class transparencia extends CI_Controller {
                 if ($data === FALSE)
                     throw new Exception("Error al leer el archivo");
 
-                force_download($this->jsonCatalog[$ref][ ( $fileType == 'Excel' ? 'excel' : 'xml' ) ]['original_name'], $data);
+                force_download($this->jsonCatalog[$ref]['html']['original_name'], $data);
             } else 
                 throw new Exception("Referencia a archivo no encontrada");
         } catch (Exception $ex) {          

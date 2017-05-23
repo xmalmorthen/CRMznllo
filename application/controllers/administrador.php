@@ -36,55 +36,39 @@ class administrador extends CI_Controller {
             try {
                 $files = $_FILES;
 
-                if ( ($files['excelFile']['error'] != 0) || ($files['xmlFile']['error'] != 0 ) )
-                    throw new Exception("Falta adjuntar archivo(s)");
+                if ( $files['htmlFile']['error'] != 0 )
+                    throw new Exception("Falta adjuntar archivo");
             
-                $excelExtension = NULL;
-                $xmlExtension = NULL;
+                $htmlExtension = NULL;
                 try {
-                    $excelExtension = '.' . explode(".", $files['excelFile']['name'])[1];
-                    $xmlExtension = '.' . explode(".", $files['xmlFile']['name'])[1];
+                    $htmlExtension = '.' . explode(".", $files['htmlFile']['name'])[1];
                 } catch (Exception $exc) {
                     throw new Exception("No se pudo leer la extensión del archivo adjunto");
                 }
                 
                 $this->load->library('doupload');
                 
-                doupload::config(EXCELREPO, 'xls|xlsx');
+                doupload::config(HTMLREPO, 'html');
                 
                 $uniqid = uniqid('',true);
                 
-                $_FILES['userfile']['name']= $uniqid . $excelExtension;
-                $_FILES['userfile']['type']= $files['excelFile']['type'];
-                $_FILES['userfile']['tmp_name']= $files['excelFile']['tmp_name'];
-                $_FILES['userfile']['error']= $files['excelFile']['error'];
-                $_FILES['userfile']['size']= $files['excelFile']['size'];
+                $_FILES['userfile']['name']= $uniqid . $htmlExtension;
+                $_FILES['userfile']['type']= $files['htmlFile']['type'];
+                $_FILES['userfile']['tmp_name']= $files['htmlFile']['tmp_name'];
+                $_FILES['userfile']['error']= $files['htmlFile']['error'];
+                $_FILES['userfile']['size']= $files['htmlFile']['size'];
                 
-                $MsgResponseExcel = NULL;
-                if (doupload::upload($MsgResponseExcel)) {
+                $MsgResponseHTML = NULL;
+                if (doupload::upload($MsgResponseHTML)) {
                     
-                    $excel = $MsgResponseExcel;
+                    $html = $MsgResponseHTML;
                     
-                    doupload::config(XMLREPO, 'xml');
-
-                    $_FILES['userfile']['name']= $uniqid . $xmlExtension;
-                    $_FILES['userfile']['type']= $files['xmlFile']['type'];
-                    $_FILES['userfile']['tmp_name']= $files['xmlFile']['tmp_name'];
-                    $_FILES['userfile']['error']= $files['xmlFile']['error'];
-                    $_FILES['userfile']['size']= $files['xmlFile']['size'];
-
-                    $MsgResponseXML = NULL;
-                    doupload::upload($MsgResponseXML);
-                    
-                    $xml = $MsgResponseXML;
-
-                    $excel['upload_data']['original_name'] = $files['excelFile']['name'];
-                    $xml['upload_data']['original_name'] = $files['xmlFile']['name'];                    
+                    $html['upload_data']['original_name'] = $files['htmlFile']['name'];
                     
                     //REGISTRO DE ARCHIVO EN CATÁLOGO
                     
                     try {
-                        $jsonCatalog = @json_decode(file_get_contents(JSONCATALOG), true);                        
+                        $jsonCatalog = @json_decode(file_get_contents(JSONCATALOG), true);
                     } catch (Exception $exc) {
                     }
 
@@ -108,8 +92,7 @@ class administrador extends CI_Controller {
                     
                     $jsonCatalog[$uniqid]['data'] = $data;
                     
-                    $jsonCatalog[$uniqid]['excel'] = $excel['upload_data'];
-                    $jsonCatalog[$uniqid]['xml'] = $xml['upload_data'];
+                    $jsonCatalog[$uniqid]['html'] = $html['upload_data'];
                                           
                     $jsonStructure = json_encode($jsonCatalog,JSON_UNESCAPED_UNICODE);
                    
@@ -166,7 +149,7 @@ class administrador extends CI_Controller {
         
         $this->load->library('table');
         $this->table->set_template($tmpl);      
-        $this->table->set_heading('Archivo Excel', 'Archivo XML', 'Descripción', 'Fecha de Publicación', 'Hora de Publicación','Acciones');
+        $this->table->set_heading('Archivo HTML', 'Descripción', 'Fecha de Publicación', 'Hora de Publicación','Acciones');
         
         $areOneActive = FALSE;
         
@@ -174,19 +157,17 @@ class administrador extends CI_Controller {
         {
             if ( $row['data']['status'] > 1 )                
                 continue;
-            $cell = array('data' => $row['excel']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') );
+            $cell = array('data' => $row['html']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') );
             
 
             //'<i class="fa fa-eye" aria-hidden="true"></i>'
             
-            $actions = anchor("./transparencia/download/Excel/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo de Excel"></i>')
-                    . anchor("./transparencia/download/XML/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo XML"></i>')
-                    . anchor("./transparencia/delete/$index",'<i class="fa fa-trash fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Eliminar archivos"></i>')
+            $actions = anchor("./transparencia/download/HTML/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo de HTML"></i>')
+                    . anchor("./transparencia/delete/$index",'<i class="fa fa-trash fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Eliminar archivo"></i>')
                     . anchor("./transparencia/". ( $row['data']['status'] == 1 ? 'hide' : 'show') ."/$index",'<i class="fa fa-eye'. ( $row['data']['status'] == 1 ? '-slash' : '') .' fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="' . ( $row['data']['status'] == 1 ? 'Ocultar información' : 'Publicar información') . '"></i>');
             
             $this->table->add_row(
-                array('data' => $row['excel']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
-                array('data' => $row['xml']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
+                array('data' => $row['html']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
                 array('data' => $row['data']['description'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
                 array('data' => $row['data']['date'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
                 array('data' => $row['data']['time'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),

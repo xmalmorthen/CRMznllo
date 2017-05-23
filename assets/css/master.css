@@ -3,6 +3,10 @@ body {
       line-height: 1.8;
       color: #818181;
   }
+  a:link, a:visited, a:hover, a:active{
+      text-decoration: none!Important;
+      color: black!Important;
+  }  
   h2 {
       font-size: 24px;
       text-transform: uppercase;

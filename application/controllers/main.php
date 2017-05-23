@@ -19,10 +19,11 @@ class main extends CI_Controller {
             "<link rel='stylesheet' type='text/css' href='". base_url(CSS . 'ownDataTableStyle.css') ."'>"
         );
         $this->model['script'] = array(
-            "<script src='" . base_url(JS . 'jquery.dataTables.min.js') . "'></script>"
+            "<script src='" . base_url(JS . 'jquery.dataTables.min.js') . "'></script>",
+            "<script src='" . base_url(FWRKS . 'htmlTableToExcelSpreadsheet/jquery.table2excel.js') . "'></script>"
         );   
         
-        $this->model['scripts'] = "$('#tblData').DataTable({ 'language': {'url': '" . base_url(JS . 'Spanish.json') ."'}});";
+        $this->model['scripts'] = "$('#tblData').DataTable({ 'language': {'url': '" . base_url(JS . 'Spanish.json') ."'}});";        
     }
     
     public function index()
@@ -32,9 +33,9 @@ class main extends CI_Controller {
     }
     
     public function transparencia($partialView = FALSE){
-        $viewModel['table'] = $table = $this->transparencia_model->readPubXMLtoTable();
-        $viewModel['fileObj'] = $table = $this->transparencia_model->arrayObj;
-
+        $viewModel['table'] = $this->transparencia_model->readPubHTMLtoTable();
+        $viewModel['fileObj'] = $this->transparencia_model->arrayObj;
+       
         //TRANSPARENCIA
         $this->model['content'] = $this->load->view('sections/transparencia',$viewModel,TRUE);
         
