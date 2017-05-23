@@ -60,7 +60,7 @@ class login extends CI_Controller {
     }
     
     private function _redirect(){
-        $redirect = $this->router->admin_controller;                
+        $redirect = $this->router->routes['admin_controller'];        
         $rout = $this->input->post('rout');
         if ($rout){
             $originrout = $this->uri->segment(1) . $this->uri->segment(2);            
