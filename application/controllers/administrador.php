@@ -159,13 +159,19 @@ class administrador extends CI_Controller {
                 continue;
             $cell = array('data' => $row['html']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') );
             
-
-            //'<i class="fa fa-eye" aria-hidden="true"></i>'
+            $dataContent = "<div class='pull-right'><a href='". base_url("index.php/transparencia/delete/{$index}") ."' class='btn btn-success' role='button' aria-hidden='true' data-toggle='tooltip' title='Aceptar'><i class='fa fa-check'></i></a> <button type='button' class='btn btn-danger btnActionDeleteCancel' aria-hidden='true' data-toggle='tooltip' title='Cancelar' onclick='cancelDeleteAction()'><i class='fa fa-ban' aria-hidden='true'></i></button></div>";
             
             $actions = anchor("./transparencia/download/HTML/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo de HTML"></i>')
-                    . anchor("./transparencia/delete/$index",'<i class="fa fa-trash fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Eliminar archivo"></i>')
+                    . anchor(
+                            null,
+                            '<i class="fa fa-trash fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Eliminar archivo"></i>',
+                            array(
+                                'class'=>'deleteActionBtn', 
+                                'data-toggle'=>'popover', 
+                                'title' => "<h3><i class='fa fa-question-circle-o' aria-hidden='true'></i> Confirmar la acción</h3>",
+                                'data-content' => $dataContent))
                     . anchor("./transparencia/". ( $row['data']['status'] == 1 ? 'hide' : 'show') ."/$index",'<i class="fa fa-eye'. ( $row['data']['status'] == 1 ? '-slash' : '') .' fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="' . ( $row['data']['status'] == 1 ? 'Ocultar información' : 'Publicar información') . '"></i>');
-            
+                       
             $this->table->add_row(
                 array('data' => $row['html']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
                 array('data' => $row['data']['description'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') ),
