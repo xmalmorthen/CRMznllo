@@ -43,7 +43,7 @@
             Descargar archivo de Excel
         </div>        
         <div class="col-sm-3 text-center">
-            Descargar archivo de HTML
+            Descargar archivo HTML
         </div>        
     </div>
     <div class="row">

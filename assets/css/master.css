@@ -111,7 +111,7 @@ body {
   }
   .navbar {
       margin-bottom: 0;
-      background-color: whitesmoke;
+      background-color: #eaeaea;
       z-index: 9999;
       border: 0;
       font-size: 12px !important;
@@ -141,10 +141,23 @@ body {
   .pading-top{
       padding-top: 48px;
   }
+  footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0!Important;
+      padding: 20px 10px 10px 10px!Important;
+      background-color: #eaeaea;
+  }
   footer .glyphicon {
       font-size: 20px;
       margin-bottom: 20px;
       color: #f4511e;
+  }
+  .footerText {
+      font-size: .8em;   
+      line-height: 1.2em
   }
   .slideanim {visibility:hidden;}
   .slide {
@@ -153,6 +166,13 @@ body {
       animation-duration: 1s;
       -webkit-animation-duration: 1s;
       visibility: visible;
+  }
+  #errorGeneral {
+      margin: 80px auto;      
+      position: fixed;
+      font-size: 2em;
+      padding: 30px;  
+      right: 100px;
   }
   @keyframes slide {
     0% {

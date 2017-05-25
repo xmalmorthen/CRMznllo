@@ -19,7 +19,7 @@ class administrador extends CI_Controller {
             "<script src='" . base_url(JS . 'jquery.dataTables.min.js') . "'></script>"
         );   
         
-        $this->model['scripts'] = "$('#tblFilesUploaded').DataTable({ 'order': [[ 3, 'desc' ],[ 4, 'desc' ]] ,'language': {'url': '" . base_url(JS . 'Spanish.json') ."'}});";
+        $this->model['scripts'] = "$('#tblFilesUploaded').DataTable({ 'order': [[ 2, 'desc' ],[ 3, 'desc' ]] ,'language': {'url': '" . base_url(JS . 'spanish.json') ."'}});";
     }
     
     public function index()
@@ -159,9 +159,9 @@ class administrador extends CI_Controller {
                 continue;
             $cell = array('data' => $row['html']['original_name'], 'class' => ( $row['data']['status'] == 1 ? 'success' : '') );
             
-            $dataContent = "<div class='pull-right'><a href='". base_url("index.php/transparencia/delete/{$index}") ."' class='btn btn-success' role='button' aria-hidden='true' data-toggle='tooltip' title='Aceptar'><i class='fa fa-check'></i></a> <button type='button' class='btn btn-danger btnActionDeleteCancel' aria-hidden='true' data-toggle='tooltip' title='Cancelar' onclick='cancelDeleteAction()'><i class='fa fa-ban' aria-hidden='true'></i></button></div>";
+            $dataContent = "<div class='pull-right'><a href='". site_url("/transparencia/delete/{$index}") ."' class='btn btn-success' role='button' aria-hidden='true' data-toggle='tooltip' title='Aceptar'><i class='fa fa-check'></i></a> <button type='button' class='btn btn-danger btnActionDeleteCancel' aria-hidden='true' data-toggle='tooltip' title='Cancelar' onclick='cancelDeleteAction()'><i class='fa fa-ban' aria-hidden='true'></i></button></div>";
             
-            $actions = anchor("./transparencia/download/HTML/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo de HTML"></i>')
+            $actions = anchor("./transparencia/download/HTML/$index",'<i class="fa fa-download fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Descargar archivo HTML"></i>')
                     . anchor(
                             null,
                             '<i class="fa fa-trash fa-2x actionButton" aria-hidden="true" data-toggle="tooltip" title="Eliminar archivo"></i>',

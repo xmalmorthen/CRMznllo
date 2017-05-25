@@ -23,11 +23,11 @@ class main extends CI_Controller {
             "<script src='" . base_url(FWRKS . 'htmlTableToExcelSpreadsheet/jquery.table2excel.js') . "'></script>"
         );   
         
-        $this->model['scripts'] = "$('#tblData').DataTable({ 'language': {'url': '" . base_url(JS . 'Spanish.json') ."'}});";        
+        $this->model['scripts'] = "$('#tblData').DataTable({ 'language': {'url': '" . base_url(JS . 'spanish.json') ."'}});";        
     }
     
     public function index()
-    {         
+    {  
         $this->model['content'] = $this->transparencia(TRUE);
         $this->load->view('layouts/master',$this->model);
     }

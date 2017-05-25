@@ -37,7 +37,7 @@
             <div class="page-header">
                 <h3>Formulario de Registro</h3>
             </div>
-            <form class="form-horizontal " method="post" enctype="multipart/form-data" action="<?php echo base_url("index.php/administrador/transparencia") ?>">    
+            <form class="form-horizontal " method="post" enctype="multipart/form-data" action="<?php echo site_url("/administrador/transparencia") ?>">    
                 <?php 
                     if ($this->input->post() || $this->session->flashdata('success')) { ?>
                         <div class='alert <?php echo ($this->session->flashdata('error') ? 'alert-danger' : ($this->session->flashdata('success') ? 'alert-success' : 'alert-danger' )); ?>  text-left'>

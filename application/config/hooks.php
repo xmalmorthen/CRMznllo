@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$hook['post_controller_constructor'][] = array(
+$hook['post_controller'][] = array(
                                 'class'    => 'verifyuser',
                                 'function' => 'validateUser',
                                 'filename' => 'verifyuser.php',

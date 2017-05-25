@@ -8,7 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="ROBOTS" content="INDEX, FOLLOW">
-    <title>Cruz Roja Manzanillo Colima</title>
     <meta property="og:title" content="Cruz Roja Manzanillo Colima">
 
     <meta name="description" content="Conoce más de la Cruz Roja Manzanillo Colima ¡Cruz Roja somos todos! Conócenos y se parte de nuestra comunidad">
@@ -45,15 +44,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <script src="<?php echo base_url(FWRKS .'jquery-3.2.1/jquery-3.2.1.min.js'); ?>"></script>
     <script src="<?php echo base_url(FWRKS .'bootstrap-3.3.7/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url(JS .'modernizr-custom.js'); ?>"></script>
+    
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="top" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <noscript><meta http-equiv="refresh" content="0;url=<?php echo site_url('error/noscript'); ?>"></noscript>
     <div class="container">
         <!-- MENU SECTION -->    
         <?php if (isset($menu)) echo $menu; ?>
         <!-- CONTENT SECTION -->
         <div class="pading-top">
+            <!-- ERROR GENERAL SECTION -->
+            <?php 
+                if ($this->session->flashdata('errorGeneral')) { ?>
+                    <div id="errorGeneral" class='alert alert-danger text-center'>
+                        <i class='fa fa-exclamation-triangle'></i>
+                        <span style='padding-left: 10px;'><?php echo $this->session->flashdata('errorGeneral'); ?></span>
+                    </div>
+            <?php } ?>
+            
             <?php if (isset($content)) echo $content; ?>
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <!-- FOOTER SECTION -->
         <?php $this->load->view("sections/footer") ?>
     </div>
@@ -71,6 +86,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <script type="text/javascript">
         $(document).ready(function(){
+            setTimeout(function() { $('#errorGeneral').alert('close').remove();}, 5000);
+            
+            if (!Modernizr.borderradius) {
+                window.location= '<?php echo site_url('error/compatibilidad'); ?>';
+            };
+            
             $('[data-toggle="tooltip"]').tooltip(); 
             $('[data-toggle="popover"]').popover({ html: true });
             <?php if (isset($scripts)) echo $scripts; ?>

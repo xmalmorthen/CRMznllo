@@ -91,7 +91,8 @@ class transparencia extends CI_Controller {
             if ($lastStatus == 1)            
                 $this->session->set_flashdata('Note',"Actualmente no se encuentra información pública activa, favor de considerar activar alguno de los registros.");
         } catch (Exception $exc) {
-            $this->session->set_flashdata('errorAction', $ex->getMessage());
+			die($exc->getMessage());
+            $this->session->set_flashdata('errorAction', $exc->getMessage());
         }
         redirect("./administrador/transparencia");  
     }

@@ -5,7 +5,7 @@
         <section class="login-form">
             <div style="text-align: center;"> <img src="<?php echo base_url(IMGS .'logocr-01.png'); ?>" alt="Cruz Roja Mexicana" width="200"> </div>                        
             
-            <form method="post" action="<?php echo base_url('index.php/login'); ?>" role="login">
+            <form method="post" action="<?php echo site_url('/login'); ?>" role="login">
                 
                 <?php 
                     echo validation_errors(); 
